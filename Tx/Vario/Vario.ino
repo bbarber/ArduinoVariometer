@@ -1,6 +1,6 @@
-#include "MS5611.h"
+#include "MS5607.h"
 
-MS5611 MS5611;
+MS5607 MS5607;
 
 // This will change based on weather
 const float seaLevelPressure = 1016.1;
@@ -8,7 +8,7 @@ float startingAltitude;
 
 void setup() {
   Serial.begin(9600);
-  MS5611.begin();
+  MS5607.begin();
   startingAltitude = getAltitudeAvg();
 }
 
@@ -74,7 +74,7 @@ float getPressure() {
   float pressures[readings];
 
   for(int i = 0; i < readings; i++) {
-    pressures[i] = MS5611.getPressure();
+    pressures[i] = MS5607.getPressure();
   }
   
   float median = pressures[readings / 2];
@@ -90,7 +90,7 @@ float getTemperature() {
   int temperatures[readings];
 
   for(int i = 0; i < readings; i++) {
-    temperatures[i] = MS5611.getTemperature();
+    temperatures[i] = MS5607.getTemperature();
   }
   
   int median = temperatures[readings / 2];

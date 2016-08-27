@@ -1,14 +1,14 @@
 /*
- * https://github.com/gronat/MS5611
-ms5611.h
-Library for barometric pressure sensor MS5611-01BA on I2C with arduino
+ * https://github.com/gronat/MS5607
+MS5607.h
+Library for barometric pressure sensor MS5607-01BA on I2C with arduino
 
 by Petr Gronat@2014
 */
 
 // Include guard token - prevents to include header file twice
-#ifndef MS5611_h
-#define MS5611_h   //create token
+#ifndef MS5607_h
+#define MS5607_h   //create token
 
 // Include Arduino libraries
 #include "Arduino.h"
@@ -17,12 +17,12 @@ by Petr Gronat@2014
 #define N_PROM_PARAMS 6
 
 
-// address of the device MS5611
-#define ADD_MS5611 0x77   // can be 0x76 if CSB pin is connected to GND
+// address of the device MS5607
+#define ADD_MS5607 0x77   // can be 0x76 if CSB pin is connected to GND
 
-class MS5611{
+class MS5607{
   public:
-    MS5611();   //constructor
+    MS5607();   //constructor
       void    begin();
       uint32_t  getRawTemperature();
       int32_t   getTemperature();
