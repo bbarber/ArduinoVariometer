@@ -21,7 +21,10 @@ void loop()
   int altitudeRound = round(altitude);
   int msg[] = { altitudeRound };
 
-  vw_send((uint8_t *)msg, 1);
+  char message[4];
+  itoa(altitudeRound, message, 10);
+
+  vw_send((uint8_t *)message, strlen(message));
   vw_wait_tx(); // Wait until the whole message is gone
  
   delay(50);
