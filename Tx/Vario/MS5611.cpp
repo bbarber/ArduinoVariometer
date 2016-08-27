@@ -1,5 +1,4 @@
 /*
- * https://github.com/gronat/MS5611
 MS5611.h
 Library for barometric pressure sensor MS5611-01BA on I2C with arduino
 
@@ -48,11 +47,11 @@ int32_t MS5611::getPressure(){
   getTemperature();     //updates temperature _dT and _T
   uint32_t D1 = getRawPressure();
   
-  int64_t OFF  = (int64_t)_C[2-1]*65536 
-         + (int64_t)_C[4-1]*_dT/128;
+  int64_t OFF  = (int64_t)_C[2-1]*131072LL 
+         + (int64_t)_C[4-1]*_dT/64LL;
   
-  int64_t SENS = (int64_t)_C[1-1]*32768 
-         + (int64_t)_C[3-1]*_dT/256;
+  int64_t SENS = (int64_t)_C[1-1]*65536LL 
+         + (int64_t)_C[3-1]*_dT/128LL;
   _P = (D1*SENS/2097152 - OFF)/32768;
   return _P;
 }
