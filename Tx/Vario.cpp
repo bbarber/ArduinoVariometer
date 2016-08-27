@@ -1,19 +1,22 @@
+
+#include <Arduino.h>
 #include "MS5607.h"
+#include "Vario.h"
 
 MS5607 MS5607;
 
 // This will change based on weather
 const float seaLevelPressure = 1016.1;
+
 float startingAltitude;
 
-void setup() {
+void Vario::setup() {
   Serial.begin(9600);
   MS5607.begin();
   startingAltitude = getAltitudeAvg();
 }
 
-
-void loop() {
+float Vario::getRelativeAltitude() {
 
   float relativeAltitudeSum = 0;
   int altitudeReadings = 10;
@@ -26,15 +29,10 @@ void loop() {
   
   float realtiveAltitudeAvg = relativeAltitudeSum / altitudeReadings;
   
-
-  Serial.println(realtiveAltitudeAvg);
-  //Serial.println(getTemperature());
-  //Serial.println();
-  
-  delay(100);
+  return realtiveAltitudeAvg;
 }
 
-float getAltitude() {
+float Vario::getAltitude() {
   
   float pressure = getPressure();
   float temperature = getTemperature();
@@ -49,7 +47,7 @@ float getAltitude() {
   return altitude * 3.28084;
 }
 
-float getAltitudeAvg() {
+float Vario::getAltitudeAvg(void) {
 
   // Take many samples and return
   // the median to smooth out the results
@@ -65,7 +63,7 @@ float getAltitudeAvg() {
   return median;
 }
 
-float getPressure() {
+float Vario::getPressure() {
 
   // Take many samples and return
   // the median to smooth out the results
@@ -81,7 +79,7 @@ float getPressure() {
   return median / 100.0;
 }
 
-float getTemperature() {
+float Vario::getTemperature() {
 
   // Take many samples and return
   // the median to smooth out the results
